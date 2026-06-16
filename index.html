@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .text {
+            font-size: 60px;
+            font-weight: 900;
+            text-align: center;
+            color: #ff0033;
+            text-shadow: 0 0 20px #ff0033, 0 0 40px #ff0033;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0%,100% { transform: translate(0,0); }
+            25% { transform: translate(-5px,5px); }
+            50% { transform: translate(5px,-5px); }
+            75% { transform: translate(-5px,-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="text">cái địt con mẹ m ngu vậy hahahahhah</div>
+
+    <audio id="bgm" loop autoplay>
+        <source src="file.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('bgm');
+            audio.volume = 1.0;
+            audio.muted = false;
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(function() {
+                    console.log('Dang phat');
+                }).catch(function(err) {
+                    console.log('Auto-play bi chan, thu lai');
+                    document.body.addEventListener('click', function() {
+                        audio.play();
+                    }, { once: true });
+                    document.body.addEventListener('touchstart', function() {
+                        audio.play();
+                    }, { once: true });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
