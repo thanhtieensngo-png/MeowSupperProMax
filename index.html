@@ -2,62 +2,263 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SuperMeow - FF Tool Pro</title>
     <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: #111;
+            --border: #2a2a2a;
+            --acc: #ff0044;
+            --ac2: #00ddff;
+            --gold: #ffcc00;
+            --txt: #bbb;
+            --wt: #fff;
+            --gr: #00ff55;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            font-family: 'Segoe UI','Consolas',monospace;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
+            flex-direction: column;
+            padding: 20px;
         }
-        .text {
-            font-size: 60px;
-            font-weight: 900;
+        .logo {
             text-align: center;
-            color: #ff0033;
-            text-shadow: 0 0 20px #ff0033, 0 0 40px #ff0033;
-            animation: shake 0.5s infinite;
+            margin-bottom: 20px;
         }
-        @keyframes shake {
-            0%,100% { transform: translate(0,0); }
-            25% { transform: translate(-5px,5px); }
-            50% { transform: translate(5px,-5px); }
-            75% { transform: translate(-5px,-5px); }
+        .logo-icon { font-size: 60px; animation: float 2s ease-in-out infinite; }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--acc), var(--ac2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .panel h3 {
+            text-align: center;
+            color: var(--ac2);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 12px;
+            color: var(--txt);
+        }
+        .row label { flex: 1; font-size: 11px; }
+        .switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            display: inline-block;
+        }
+        .switch input { display: none; }
+        .slider {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #333;
+            border-radius: 26px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .slider::before {
+            content: '';
+            position: absolute;
+            height: 20px; width: 20px;
+            left: 3px; bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        input:checked + .slider { background: var(--gr); }
+        input:checked + .slider::before { transform: translateX(24px); }
+        .btn-start {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ff0044, #ff5500);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 20px rgba(255,0,68,0.4);
+        }
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 4px 20px rgba(255,0,68,0.4); }
+            50% { box-shadow: 0 4px 40px rgba(255,0,68,0.8); }
+        }
+        .btn-start:active { transform: scale(0.95); }
+        .status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--txt);
+        }
+        .warning {
+            text-align: center;
+            color: var(--gold);
+            font-size: 10px;
+            margin-top: 8px;
+        }
+        .ver {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+        #msg {
+            text-align: center;
+            color: var(--gr);
+            font-size: 12px;
+            margin-top: 8px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="text">cái địt con mẹ m ngu vậy hahahahhah</div>
 
-    <audio id="bgm" loop autoplay>
+    <div class="logo">
+        <div class="logo-icon">🐱</div>
+        <div class="logo-text">SuperMeow</div>
+        <div style="color:#888;font-size:11px;letter-spacing:2px;">FREE FIRE TOOL VIP</div>
+    </div>
+
+    <div class="panel">
+        <h3>⚙️ CÀI ĐẶT HACK</h3>
+
+        <div class="row">
+            <label>🎯 AIMLOCK (Bám Đầu)</label>
+            <label class="switch">
+                <input type="checkbox" id="aim" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>🔫 AUTO FIRE (Tự Bắn)</label>
+            <label class="switch">
+                <input type="checkbox" id="auto" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>👁 ESP (Nhìn Xuyên Tường)</label>
+            <label class="switch">
+                <input type="checkbox" id="esp" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>🗺 MINI MAP (Bản Đồ Nhỏ)</label>
+            <label class="switch">
+                <input type="checkbox" id="map" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>💥 NO RECOIL (Triệt Rung)</label>
+            <label class="switch">
+                <input type="checkbox" id="recoil" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>⚡ SPEED HACK (Tăng Tốc)</label>
+            <label class="switch">
+                <input type="checkbox" id="speed" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <label>🛡 ANTI BAN (Chống Khóa)</label>
+            <label class="switch">
+                <input type="checkbox" id="antib" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <button class="btn-start" id="btnStart">⚡ START HACK</button>
+        <div id="msg">✅ ĐANG KÍCH HOẠT... VUI LÒNG CHỜ...</div>
+        <div class="status" id="statusText">Trạng thái: Sẵn sàng</div>
+        <div class="warning">⚠ Chỉ dùng cho mục đích giải trí</div>
+    </div>
+
+    <div class="ver">SuperMeow v6.9 | by MeowSupper</div>
+
+    <audio id="trollAudio" loop>
         <source src="file.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        window.addEventListener('load', function() {
-            var audio = document.getElementById('bgm');
-            audio.volume = 1.0;
-            audio.muted = false;
-            var playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(function() {
-                    console.log('Dang phat');
-                }).catch(function(err) {
-                    console.log('Auto-play bi chan, thu lai');
-                    document.body.addEventListener('click', function() {
-                        audio.play();
-                    }, { once: true });
-                    document.body.addEventListener('touchstart', function() {
-                        audio.play();
-                    }, { once: true });
+        var btnStart = document.getElementById('btnStart');
+        var msg = document.getElementById('msg');
+        var statusText = document.getElementById('statusText');
+        var audio = document.getElementById('trollAudio');
+
+        audio.volume = 1.0;
+        audio.loop = true;
+
+        btnStart.addEventListener('click', function() {
+            msg.style.display = 'block';
+            statusText.textContent = 'Trạng thái: Đang kích hoạt...';
+            statusText.style.color = '#ffcc00';
+
+            setTimeout(function() {
+                msg.textContent = '🔊 ĐANG BẬT ÂM THANH HACK...';
+                audio.play().then(function() {
+                    msg.textContent = '✅ HACK ĐÃ KÍCH HOẠT! VÀO GAME NGAY!';
+                    msg.style.color = '#00ff55';
+                    statusText.textContent = 'Trạng thái: Đã kích hoạt';
+                    statusText.style.color = '#00ff55';
+                }).catch(function() {
+                    msg.textContent = '❌ LỖI! Vui lòng bấm lại!';
+                    msg.style.color = '#ff4444';
                 });
-            }
+            }, 1500);
         });
+
+        // Cac toggle de trang tri, khong co tac dung thuc
+        var toggles = ['aim','auto','esp','map','recoil','speed','antib'];
+        for (var i = 0; i < toggles.length; i++) {
+            document.getElementById(toggles[i]).addEventListener('change', function() {});
+        }
     </script>
 </body>
 </html>
